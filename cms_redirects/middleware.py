@@ -1,7 +1,8 @@
 from cms_redirects.models import CMSRedirect
 from django import http
 from django.conf import settings
-
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 def get_redirect(old_path):
     try:
@@ -42,6 +43,11 @@ class RedirectFallbackMiddleware(object):
 
 
             if r is not None:
+                if r.soft:
+                    redirect_url = r.page.get_absolute_url() if r.page else r.new_path
+                    return render_to_response('cms_redirects/soft_redirect.html',
+                                             {'redirect': r, 'redirect_url': redirect_url},
+                                             context_instance=RequestContext(request))
                 if r.page:
                     if r.response_code == '302':
                         return http.HttpResponseRedirect(r.page.get_absolute_url())

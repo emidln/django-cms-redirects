@@ -1,0 +1,27 @@
+<html>
+	<head>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var t = {{ redirect.soft_timeout_seconds }};
+			if (t <= 0) {
+			    t = 0;
+			};
+			window.setTimeout(function() {
+				{% if redirect.soft_erase_history %}	
+				window.location.replace("{{ redirect_url }}");
+				{% else %}
+				window.location = "{{ redirect_url }}";
+				{% endif %}
+			}, t*1000);
+		});
+		</script>
+	</head>
+	<body>
+		{% block soft_redirect_body %}
+		<p>Redirecting to <a href="{{ redirect_url }}">{{ redirect_url }}</a> in {{ redirect.soft_timeout_seconds }} seconds.</p>
+		<p>{{ redirect.message }}</p>
+		{% endblock %}
+	</body>
+</html>
+
