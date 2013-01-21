@@ -43,3 +43,4 @@ Providing a ``redirect from`` value for the source and NO destination will resul
 
 Soft (Javascript-based) redirects can be enabled, as well as configured for how the redirect interacts with browser history, what message to display, and the timeout to be used. The template rendered is at cms_redirects/soft_redirects.html and has a base that you can override the soft_redirect_body for customization.
 
+A new flag, ``enabled``, which defaults to ``True``, is available to enable/disable redirects without deleting them.

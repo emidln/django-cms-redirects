@@ -7,6 +7,7 @@ from django.template import RequestContext
 def get_redirect(old_path):
     try:
         r = CMSRedirect.objects.get(site__id__exact=settings.SITE_ID,
+                                    enabled=True,
                                     old_path=old_path)
     except CMSRedirect.DoesNotExist:
         r = None

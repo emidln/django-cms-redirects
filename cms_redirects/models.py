@@ -23,6 +23,7 @@ class CMSRedirect(models.Model):
     message = models.CharField(max_length=500, null=True, blank=True, help_text=_("Message to be displayed during a soft redirect."))
     soft_timeout_seconds = models.IntegerField(default=0, help_text=_("Time to wait before redirecting the user."))
     soft_erase_history = models.BooleanField(default=True, help_text=_("If checked, the redirect page does not show up in the browser's history."))
+    enabled = models.BooleanField(default=True, help_text=_("If checked, the redirect is enabled and live."))
 
     def page_site(self):
         if self.page:
